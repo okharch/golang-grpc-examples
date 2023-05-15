@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package main;
+option go_package = "github.com/okharch/golang-grpc-examples/grpc-cancel/api";
+
+service TimeService {
+    rpc StreamTime (StreamTimeRequest) returns (stream StreamTimeResponse) {}
+}
+
+message StreamTimeRequest {
+}
+
+message StreamTimeResponse {
+    string time = 1;
+}
+

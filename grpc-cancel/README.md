@@ -1,0 +1,53 @@
+# gRPC Time Streaming Example with Go
+
+This example demonstrates how to close streaming from client in a proper way.
+Disclaimer: use context cancellation on the client, server will now to finish the stream.
+
+In the example the server streams the current time to the client. 
+The client cancels the context after 5 seconds, which stops the streaming from the server.
+
+## Getting Started
+
+### Prerequisites
+
+- Go 1.14 or higher
+- Protocol Buffers v3
+- gRPC-Go
+
+### Installing
+
+1. Install Protocol Buffers v3 and Go plugin:
+
+    ```shell
+    $ go get -u google.golang.org/protobuf/cmd/protoc-gen-go
+    $ go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
+    $ export PATH="$PATH:$(go env GOPATH)/bin"
+    ```
+
+2. Generate Go code from the protobuf file:
+
+    ```shell
+    $ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative time_stream.proto
+    ```
+
+3. Install the Go dependencies:
+
+    ```shell
+    $ go mod tidy
+    ```
+
+### Running
+
+1. Start the server:
+
+    ```shell
+    $ go run server.go
+    ```
+
+2. In a new terminal window, run the client:
+
+    ```shell
+    $ go run client.go
+    ```
+
+The client will print the time received from the server every second. After 5 seconds, the client will cancel the context and stop receiving the time.
