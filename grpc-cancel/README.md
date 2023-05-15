@@ -1,10 +1,8 @@
 # gRPC Time Streaming Example with Go
 
-This example demonstrates how to close streaming from client in a proper way.
-Disclaimer: use context cancellation on the client, server will now to finish the stream.
+This example demonstrates the proper method to halt a streaming service from the client side using gRPC in Go. The key to achieving this is through context cancellation. By canceling the context from the client side, the server is notified and can appropriately terminate the stream.
 
-In the example the server streams the current time to the client. 
-The client cancels the context after 5 seconds, which stops the streaming from the server.
+In this particular example, the server streams the current time to the client. After a period of 5 seconds, the client initiates context cancellation, which subsequently stops the time streaming from the server. This showcases an elegant way to manage control flow between client and server in real-time streaming scenarios.
 
 ## Getting Started
 
